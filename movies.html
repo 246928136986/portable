@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            * {
+                width: 100vw;
+                height: 100vh;
+                border: none;
+                margin: 0;
+                padding: 0;
+                position: fixed;
+            }
+            iframe {
+                position: relative;
+            }
+        </style>
+            <script>
+                function preventNewTabs() {
+                    const iframe = document.getElementById('myIframe');
+                    const iframeWindow = iframe.contentWindow;
+        
+                    // Check if the iframe is loaded and accessible
+                    iframe.onload = function() {
+                        // Override the window.open function within the iframe
+                        iframeWindow.open = function() {
+                            alert("Opening new tabs is blocked.");
+                        };
+        
+                        // Prevent default behavior for anchor tags
+                        const links = iframeWindow.document.querySelectorAll('a');
+                        links.forEach(link => {
+                            link.addEventListener('click', function(event) {
+                                event.preventDefault();
+                                alert("Links in the iframe are blocked from opening new tabs.");
+                            });
+                        });
+                    };
+                }
+            </script>
+    </head>
+    <body>
+        <iframe id="myIframe" src="/service/hvtrs8%2F-nmvcfmri-%60lmnf.tepcgl%2Carp-" sandbox="allow-scripts allow-same-origin"></iframe>
+        <script>
+            // Function to prevent opening new tabs
+            function preventNewTabs(event) {
+                event.preventDefault();
+                alert("Opening new tabs is blocked.");
+            }
+    
+            // Attach the event listeners after the document is loaded
+            window.onload = function() {
+                // Prevent default behavior for all links
+                const links = document.querySelectorAll('a[target="_blank"], a[target="_new"]');
+                links.forEach(link => {
+                    link.addEventListener('click', preventNewTabs);
+                });
+    
+                // Override window.open to prevent new tabs
+                window.open = function() {
+                    alert("Opening new tabs is blocked.");
+                };
+            };
+        </script>
+
+</html>
